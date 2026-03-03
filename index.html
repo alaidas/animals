@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jungle animals Video POC</title>
+  <style>
+    :root {
+      --text: #1c1c1e;
+      --secondary: #8e8e93;
+      --blue: #0a84ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at 20% -10%, #ffffff, #edf1ff 45%, #eef2f7 100%);
+      min-height: 100vh;
+      display: grid;
+      place-items: start center;
+      color: var(--text);
+      padding: 16px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .phones {
+      width: min(980px, 100%);
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: center;
+    }
+    .phone {
+      width: min(430px, 48vw);
+      aspect-ratio: 9 / 19.5;
+      background: #111;
+      border-radius: 46px;
+      padding: 14px;
+      position: relative;
+      box-shadow: 0 30px 70px rgba(0,0,0,.35), inset 0 0 0 2px #2a2a2a;
+    }
+    .notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38%;
+      height: 28px;
+      background: #0b0b0b;
+      border-radius: 0 0 18px 18px;
+      z-index: 5;
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 34px;
+      overflow: hidden;
+      background: #f2f2f7;
+      border: 1px solid #2f2f2f;
+    }
+    .home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36%;
+      height: 5px;
+      background: rgba(255,255,255,.75);
+      border-radius: 999px;
+      z-index: 6;
+    }
+
+    .app {
+      width: 100%;
+      height: 100%;
+      padding: 56px 16px 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(60,60,67,.12);
+      gap: 8px;
+    }
+    .topbar-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    #viewerTitle {
+      line-height: 1.1;
+      font-size: 1.06rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .category-view {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+    }
+    .category-title { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.02em; margin: 8px 0 0; }
+    .category-sub { color: #4a4a4c; margin: 0 0 6px; }
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+    .category-btn {
+      position: relative;
+      border: 1px solid rgba(10,132,255,.18);
+      border-radius: 16px;
+      padding: 14px 12px;
+      background: rgba(255,255,255,.92);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .category-btn .emoji { font-size: 1.5rem; }
+    .category-btn .name { font-weight: 700; }
+    .category-btn .meta { color: var(--secondary); font-size: .82rem; }
+    .category-btn.locked {
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(245,245,248,.95),
+        rgba(245,245,248,.95) 8px,
+        rgba(235,235,240,.95) 8px,
+        rgba(235,235,240,.95) 16px
+      );
+      border-color: rgba(60,60,67,.18);
+      color: #7a7a80;
+      cursor: not-allowed;
+      filter: grayscale(.25);
+    }
+    .category-btn .lock-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: .72rem;
+      background: #fff;
+      color: #6b6b73;
+      border: 1px solid rgba(60,60,67,.2);
+      border-radius: 999px;
+      padding: 3px 7px;
+      font-weight: 700;
+    }
+
+    .stage {
+      border-radius: 22px;
+      background: rgba(255,255,255,.92);
+      flex: 1;
+      min-height: 0;
+      border: 1px solid rgba(10,132,255,.14);
+      overflow: hidden;
+    }
+    .card {
+      padding: 10px;
+      text-align: center;
+      transition: transform 220ms ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .animal-video {
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 18px;
+      border: 3px solid #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+      background: #111;
+    }
+    h1 { margin: 12px 0 6px; font-size: 1.9rem; letter-spacing: -0.02em; }
+    .desc { margin: 8px 0 0; background:#f7f7fa; border-radius:14px; padding:10px; font-size:.95rem; line-height:1.35; color:#2c2c2e; }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 12px;
+    }
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: transform 120ms ease, filter 120ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button:active { transform: scale(0.97); }
+    .prev,.next {
+      background: rgba(118,118,128,.16);
+      color:#1c1c1e;
+      border: 1px solid rgba(60,60,67,.18);
+    }
+    .sound {
+      background: var(--blue);
+      color:#fff;
+      box-shadow: 0 6px 16px rgba(10,132,255,.33), inset 0 1px 0 rgba(255,255,255,.28);
+    }
+
+    .change-category {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 10px;
+      padding: 0;
+      background: rgba(10,132,255,.10);
+      color: var(--blue);
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1;
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .left-note { text-align:center; margin-top:10px; font-size:.82rem; color:var(--secondary); }
+
+    .layout {
+      width: min(980px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .theme-toggle-wrap { display:flex; justify-content:flex-end; }
+    .theme-toggle {
+      border: 1px solid rgba(60,60,67,.2);
+      background: #fff;
+      color: #1c1c1e;
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .dark-row .screen { background: #111318; border-color: #2d3138; }
+    .dark-row .app { color: #f5f5f7; }
+    .dark-row .topbar { border-bottom-color: rgba(255,255,255,.12); }
+    .dark-row .category-sub,
+    .dark-row .left-note,
+    .dark-row .category-btn .meta { color: #a5acb8; }
+    .dark-row .category-btn {
+      background: #1a1f28;
+      border-color: rgba(255,255,255,.12);
+      color: #f5f5f7;
+    }
+    .dark-row .category-btn.locked {
+      background: repeating-linear-gradient(-45deg,#202530,#202530 8px,#1b202a 8px,#1b202a 16px);
+      color: #8e96a3;
+      border-color: rgba(255,255,255,.12);
+    }
+    .dark-row .category-btn .lock-badge {
+      background: #0f131a;
+      color: #c6ccd8;
+      border-color: rgba(255,255,255,.12);
+    }
+    .dark-row .stage { background: #1a1f28; border-color: rgba(255,255,255,.12); }
+    .dark-row .desc { background: #12161d; color: #d6dbe4; }
+    .dark-row .prev,
+    .dark-row .next { background: #232936; color: #e9edf5; border-color: rgba(255,255,255,.12); }
+    .dark-row .change-category { background: rgba(10,132,255,.2); color: #74b4ff; }
+
+    @media (max-width: 980px) {
+      body { overflow: auto; }
+      .phones { flex-direction: column; }
+      .phone { width: min(430px, 100%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="theme-toggle-wrap"><button class="theme-toggle" id="themeToggleBtn" type="button">🌙 Dark theme</button></div>
+    <div class="phones" id="previewRow">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <main class="app">
+            <div class="topbar">
+              <span>Application name</span>
+            </div>
+
+            <section class="category-view">
+              <h2 class="category-title">Choose animal world</h2>
+              <p class="category-sub">Pick what you want to explore • some packs are locked</p>
+
+              <div class="category-grid" id="categoryGrid"></div>
+            </section>
+
+            <p class="left-note">First screen (entry view)</p>
+          </main>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <main class="app">
+            <div class="topbar">
+              <div class="topbar-left">
+                <button class="change-category" id="changeCategoryBtn">‹</button>
+                <span id="viewerTitle">🌿 Jungle animals</span>
+              </div>
+            </div>
+
+            <section class="stage" id="stage">
+              <article class="card" id="card">
+                <video class="animal-video" id="animalVideo" autoplay muted loop playsinline controls></video>
+                <h1 id="animalName"></h1>
+                <p class="desc" id="animalDesc"></p>
+              </article>
+            </section>
+
+            <div class="controls">
+              <button class="prev" id="prevBtn">‹ Previous</button>
+              <button class="sound" id="soundBtn">🔊 Sound</button>
+              <button class="next" id="nextBtn">Next ›</button>
+            </div>
+          </main>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+
+      </div>
+
+  <script>
+    const library = {
+      jungle: {
+        emoji: '🌿',
+        label: 'Jungle',
+        purchased: true,
+        animals: [
+          { name: 'Elephant', sound: 'Animal sound!', video: './4c0dba30-5623-4a9e-b882-e997c841bbe7_wm.mp4', desc: 'This animal lives in the jungle. Watch how it moves.' },
+          { name: 'Tiger', sound: 'Splashy sound!', video: './ab4c3ca3-5371-4806-9de5-26dc008d438f_wm.mp4', desc: 'This animal enjoys jungle.' }
+        ]
+      },
+      pets: {
+        emoji: '🐶',
+        label: 'Pets',
+        purchased: false,
+        animals: [
+          { name: 'Puppy', sound: 'Woof woof!', video: './4f4ba41b-d89a-43aa-8211-60456618b8e1_wm.mp4', desc: 'Friendly pet that loves to play with people.' }
+        ]
+      },
+      water: {
+        emoji: '🌊',
+        label: 'Water',
+        purchased: true,
+        animals: [
+          { name: 'Sea animal', sound: 'Splash splash!', video: './ab4c3ca3-5371-4806-9de5-26dc008d438f_wm.mp4', desc: 'Water animals are great swimmers.' }
+        ]
+      },
+      birds: {
+        emoji: '🦜',
+        label: 'Birds',
+        purchased: false,
+        animals: [
+          { name: 'Parrot', sound: 'Chirp chirp!', video: './4f4ba41b-d89a-43aa-8211-60456618b8e1_wm.mp4', desc: 'Birds can fly and sing beautifully.' }
+        ]
+      }
+    };
+
+    let currentCategory = 'jungle';
+    let animals = library[currentCategory].animals;
+    let index = 0;
+    let touchStartX = 0;
+
+    const categoryGrid = document.getElementById('categoryGrid');
+    const viewerTitle = document.getElementById('viewerTitle');
+    const video = document.getElementById('animalVideo');
+    const nameEl = document.getElementById('animalName');
+    const desc = document.getElementById('animalDesc');
+    const stage = document.getElementById('stage');
+    const card = document.getElementById('card');
+
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const previewRow = document.getElementById('previewRow');
+
+    function renderCategories() {
+      categoryGrid.innerHTML = '';
+      Object.entries(library).forEach(([key, cat]) => {
+        const btn = document.createElement('button');
+        const isLocked = cat.purchased === false;
+        btn.className = `category-btn${isLocked ? ' locked' : ''}`;
+        btn.type = 'button';
+        btn.innerHTML = `
+          <span class="emoji">${cat.emoji}</span>
+          <span class="name">${cat.label}</span>
+          <span class="meta">${cat.animals.length} animals</span>
+          ${isLocked ? '<span class="lock-badge">🔒 Locked</span>' : ''}
+        `;
+        btn.addEventListener('click', () => {
+          if (isLocked) {
+            speak(`${cat.label} pack is locked. Please purchase to unlock.`);
+            return;
+          }
+          selectCategory(key);
+        });
+        categoryGrid.appendChild(btn);
+      });
+    }
+
+    function selectCategory(key) {
+      currentCategory = key;
+      animals = library[key].animals;
+      index = 0;
+      viewerTitle.textContent = `${library[key].emoji} ${library[key].label} animals`;
+      render(0);
+    }
+
+    function render(dir = 0) {
+      const a = animals[index];
+      card.style.transform = `translateX(${dir * 24}px)`;
+      setTimeout(() => {
+        video.src = a.video;
+        video.load();
+        video.play().catch(() => {});
+        nameEl.textContent = a.name;
+        desc.textContent = a.desc;
+        card.style.transform = 'translateX(0)';
+      }, 100);
+    }
+
+    function next() { index = (index + 1) % animals.length; render(1); }
+    function prev() { index = (index - 1 + animals.length) % animals.length; render(-1); }
+
+    function speak(text) {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.rate = 0.95;
+      u.pitch = 1.1;
+      window.speechSynthesis.speak(u);
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('prevBtn').addEventListener('click', prev);
+    document.getElementById('soundBtn').addEventListener('click', () => {
+      const a = animals[index];
+      speak(`${a.name} says ${a.sound}`);
+    });
+    document.getElementById('changeCategoryBtn').addEventListener('click', () => {
+      document.querySelector('.phones').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    themeToggleBtn.addEventListener('click', () => {
+      const dark = previewRow.classList.toggle('dark-row');
+      themeToggleBtn.textContent = dark ? '☀️ Light theme' : '🌙 Dark theme';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    stage.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (dx < -40) next();
+      if (dx > 40) prev();
+    }, { passive: true });
+
+    renderCategories();
+    selectCategory('jungle');
+  </script>
+</body>
+</html>
