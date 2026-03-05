@@ -8,13 +8,13 @@
     :root {
       --text: #1c1c1e;
       --secondary: #8e8e93;
-      --blue: #0a84ff;
+      --blue: #007aff;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-      background: radial-gradient(circle at 20% -10%, #ffffff, #edf1ff 45%, #eef2f7 100%);
+      background: #f2f2f7;
       min-height: 100vh;
       display: grid;
       place-items: start center;
@@ -27,7 +27,7 @@
     .phones {
       width: min(980px, 100%);
       display: flex;
-      gap: 24px;
+      gap: 16px;
       justify-content: center;
       align-items: center;
     }
@@ -35,10 +35,10 @@
       width: min(430px, 48vw);
       aspect-ratio: 9 / 19.5;
       background: #111;
-      border-radius: 46px;
+      border-radius: 36px;
       padding: 14px;
       position: relative;
-      box-shadow: 0 30px 70px rgba(0,0,0,.35), inset 0 0 0 2px #2a2a2a;
+      box-shadow: 0 18px 40px rgba(0,0,0,.22), inset 0 0 0 1px #2a2a2a;
     }
     .notch {
       position: absolute;
@@ -46,7 +46,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: 38%;
-      height: 28px;
+      height: 22px;
       background: #0b0b0b;
       border-radius: 0 0 18px 18px;
       z-index: 5;
@@ -54,7 +54,7 @@
     .screen {
       width: 100%;
       height: 100%;
-      border-radius: 34px;
+      border-radius: 26px;
       overflow: hidden;
       background: #f2f2f7;
       border: 1px solid #2f2f2f;
@@ -74,7 +74,7 @@
     .app {
       width: 100%;
       height: 100%;
-      padding: 56px 16px 18px;
+      padding: 50px 14px 14px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -85,7 +85,7 @@
       align-items: center;
       margin-bottom: 12px;
       padding-bottom: 8px;
-      border-bottom: 1px solid rgba(60,60,67,.12);
+      border-bottom: 1px solid rgba(60,60,67,.16);
       gap: 8px;
     }
     .topbar-left {
@@ -111,8 +111,8 @@
       gap: 12px;
       min-height: 0;
     }
-    .category-title { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.02em; margin: 8px 0 0; }
-    .category-sub { color: #4a4a4c; margin: 0 0 6px; }
+    .category-title { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; margin: 4px 0 0; }
+    .category-sub { color: #666b76; margin: 0 0 4px; font-size: .92rem; }
     .category-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -122,10 +122,10 @@
     }
     .category-btn {
       position: relative;
-      border: 1px solid rgba(10,132,255,.18);
-      border-radius: 16px;
-      padding: 14px 12px;
-      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(60,60,67,.18);
+      border-radius: 12px;
+      padding: 11px 10px;
+      background: rgba(255,255,255,.96);
       text-align: left;
       display: flex;
       flex-direction: column;
@@ -163,14 +163,14 @@
 
     .stage {
       border-radius: 22px;
-      background: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.96);
       flex: 1;
       min-height: 0;
-      border: 1px solid rgba(10,132,255,.14);
+      border: 1px solid rgba(60,60,67,.12);
       overflow: hidden;
     }
     .card {
-      padding: 10px;
+      padding: 8px;
       text-align: center;
       transition: transform 220ms ease;
       height: 100%;
@@ -183,13 +183,13 @@
       min-height: 0;
       object-fit: cover;
       object-position: center;
-      border-radius: 18px;
-      border: 3px solid #fff;
-      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+      border-radius: 12px;
+      border: 1px solid #eef1f6;
+      box-shadow: 0 1px 0 rgba(255,255,255,.35) inset;
       background: #111;
     }
-    h1 { margin: 12px 0 6px; font-size: 1.9rem; letter-spacing: -0.02em; }
-    .desc { margin: 8px 0 0; background:#f7f7fa; border-radius:14px; padding:10px; font-size:.95rem; line-height:1.35; color:#2c2c2e; }
+    h1 { margin: 10px 0 6px; font-size: 1.5rem; letter-spacing: -0.01em; }
+    .desc { margin: 8px 0 0; background:#f2f2f7; border-radius:12px; padding:10px; font-size:.92rem; line-height:1.35; color:#2c2c2e; border:1px solid rgba(60,60,67,.10); }
 
     .controls {
       display: grid;
@@ -200,8 +200,8 @@
     }
     button {
       border: 0;
-      border-radius: 14px;
-      padding: 12px 10px;
+      border-radius: 10px;
+      padding: 11px 10px;
       font-weight: 600;
       font-size: 0.95rem;
       letter-spacing: -0.01em;
@@ -218,7 +218,7 @@
     .sound {
       background: var(--blue);
       color:#fff;
-      box-shadow: 0 6px 16px rgba(10,132,255,.33), inset 0 1px 0 rgba(255,255,255,.28);
+      box-shadow: 0 1px 0 rgba(255,255,255,.35) inset;
     }
 
     .change-category {
@@ -299,17 +299,17 @@
         <div class="screen">
           <main class="app">
             <div class="topbar">
-              <span>Application name</span>
+              <span>Wildlife Explorer</span>
             </div>
 
             <section class="category-view">
-              <h2 class="category-title">Choose animal world</h2>
-              <p class="category-sub">Pick what you want to explore • some packs are locked</p>
+              <h2 class="category-title">Choose a pack</h2>
+              <p class="category-sub">Explore available packs and upcoming ones</p>
 
               <div class="category-grid" id="categoryGrid"></div>
             </section>
 
-            <p class="left-note">First screen (entry view)</p>
+            <p class="left-note">Home</p>
           </main>
         </div>
         <div class="home-indicator"></div>
@@ -335,8 +335,8 @@
             </section>
 
             <div class="controls">
-              <button class="prev" id="prevBtn">‹ Previous</button>
-              <button class="sound" id="soundBtn">🔊 Sound</button>
+              <button class="prev" id="prevBtn">‹ Prev</button>
+              <button class="sound" id="soundBtn">Play sound</button>
               <button class="next" id="nextBtn">Next ›</button>
             </div>
           </main>
