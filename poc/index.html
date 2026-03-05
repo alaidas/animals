@@ -328,7 +328,7 @@
 
             <section class="stage" id="stage">
               <article class="card" id="card">
-                <video class="animal-video" id="animalVideo" autoplay muted loop playsinline controls></video>
+                <video class="animal-video" id="animalVideo" autoplay muted loop playsinline></video>
                 <h1 id="animalName"></h1>
                 <p class="desc" id="animalDesc"></p>
               </article>
@@ -347,47 +347,23 @@
 
       </div>
 
+
   <script>
     const library = {
       jungle: {
         emoji: '🌿',
         label: 'Jungle',
         purchased: true,
-        animals: [
-          { name: 'Elephant', sound: 'Animal sound!', video: './4c0dba30-5623-4a9e-b882-e997c841bbe7_wm.mp4', desc: 'This animal lives in the jungle. Watch how it moves.' },
-          { name: 'Tiger', sound: 'Splashy sound!', video: './ab4c3ca3-5371-4806-9de5-26dc008d438f_wm.mp4', desc: 'This animal enjoys jungle.' }
-        ]
+        animals: []
       },
-      pets: {
-        emoji: '🐶',
-        label: 'Pets',
-        purchased: false,
-        animals: [
-          { name: 'Puppy', sound: 'Woof woof!', video: './4f4ba41b-d89a-43aa-8211-60456618b8e1_wm.mp4', desc: 'Friendly pet that loves to play with people.' }
-        ]
-      },
-      water: {
-        emoji: '🌊',
-        label: 'Water',
-        purchased: true,
-        animals: [
-          { name: 'Sea animal', sound: 'Splash splash!', video: './ab4c3ca3-5371-4806-9de5-26dc008d438f_wm.mp4', desc: 'Water animals are great swimmers.' }
-        ]
-      },
-      birds: {
-        emoji: '🦜',
-        label: 'Birds',
-        purchased: false,
-        animals: [
-          { name: 'Parrot', sound: 'Chirp chirp!', video: './4f4ba41b-d89a-43aa-8211-60456618b8e1_wm.mp4', desc: 'Birds can fly and sing beautifully.' }
-        ]
-      }
+      pets: { emoji: '🐶', label: 'Pets', purchased: false, animals: [] },
+      water: { emoji: '🐬', label: 'Water', purchased: false, animals: [] },
+      birds: { emoji: '🦜', label: 'Birds', purchased: false, comingSoon: true, animals: [] }
     };
 
     let currentCategory = 'jungle';
     let animals = library[currentCategory].animals;
     let index = 0;
-    let touchStartX = 0;
 
     const categoryGrid = document.getElementById('categoryGrid');
     const viewerTitle = document.getElementById('viewerTitle');
@@ -400,6 +376,315 @@
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const previewRow = document.getElementById('previewRow');
 
+    const soundPlayer = new Audio();
+
+    const embeddedJunglePack = {
+      "project": "animals",
+      "version": 1,
+      "pack": {
+        "id": "jungle",
+        "name": "Jungle",
+        "items": [
+          {
+            "id": "jungle_blue_poison_dart_frog_01",
+            "name": "Blue Poison Dart Frog",
+            "fileBase": "jungle_blue_poison_dart_frog",
+            "videoPrompt": "Slowly move head and make breathing movement."
+          },
+          {
+            "id": "jungle_boa_constrictor_02",
+            "name": "Boa Constrictor",
+            "fileBase": "jungle_boa_constrictor",
+            "videoPrompt": "Slowly move head and wigle the tonge."
+          },
+          {
+            "id": "jungle_caiman_03",
+            "name": "Caiman",
+            "fileBase": "jungle_caiman",
+            "videoPrompt": "Slowly move head and open thw jaw."
+          },
+          {
+            "id": "jungle_capuchin_monkey_04",
+            "name": "Capuchin Monkey",
+            "fileBase": "jungle_capuchin_monkey",
+            "videoPrompt": "Very small movement."
+          },
+          {
+            "id": "jungle_chimpanzee_05",
+            "name": "Chimpanzee",
+            "fileBase": "jungle_chimpanzee",
+            "videoPrompt": "Slowly move head and lift hands."
+          },
+          {
+            "id": "jungle_elephant_06",
+            "name": "Elephant",
+            "fileBase": "jungle_elephant",
+            "videoPrompt": "Swing tail, and move head. Do not walk."
+          },
+          {
+            "id": "jungle_gorilla_07",
+            "name": "Gorilla",
+            "fileBase": "jungle_gorilla",
+            "videoPrompt": "Slow head movement only, stay in position."
+          },
+          {
+            "id": "jungle_green_anaconda_08",
+            "name": "Green Anaconda",
+            "fileBase": "jungle_green_anaconda",
+            "videoPrompt": ""
+          },
+          {
+            "id": "jungle_harpy_eagle_09",
+            "name": "Harpy Eagle",
+            "fileBase": "jungle_harpy_eagle",
+            "videoPrompt": "Only head moving."
+          },
+          {
+            "id": "jungle_howler_monkey_10",
+            "name": "Howler Monkey",
+            "fileBase": "jungle_howler_monkey",
+            "videoPrompt": "Close and open mouth, stay in position."
+          },
+          {
+            "id": "jungle_jaguar_11",
+            "name": "Jaguar",
+            "fileBase": "jungle_jaguar",
+            "videoPrompt": "Swing tale and slowly move head, make loop."
+          },
+          {
+            "id": "jungle_leopard_12",
+            "name": "Leopard",
+            "fileBase": "jungle_leopard",
+            "videoPrompt": "Swing tail and move head, stay in position."
+          },
+          {
+            "id": "jungle_lion_13",
+            "name": "Lion",
+            "fileBase": "jungle_lion",
+            "videoPrompt": "Swing tale and head. Stay in position."
+          },
+          {
+            "id": "jungle_macaw_14",
+            "name": "Macaw",
+            "fileBase": "jungle_macaw",
+            "videoPrompt": "Turn head and fast expand wings, stay in position."
+          },
+          {
+            "id": "jungle_okapi_15",
+            "name": "Okapi",
+            "fileBase": "jungle_okapi",
+            "videoPrompt": "Turn head and lift one leg, stay in position."
+          },
+          {
+            "id": "jungle_orangutan_16",
+            "name": "Orangutan",
+            "fileBase": "jungle_orangutan",
+            "videoPrompt": "Turn head and lift one arm only, stay in position."
+          },
+          {
+            "id": "jungle_pangolin_17",
+            "name": "Pangolin",
+            "fileBase": "jungle_pangolin",
+            "videoPrompt": "Turn head and swing tail, stay in position."
+          },
+          {
+            "id": "jungle_red_eyed_tree_frog_18",
+            "name": "Red-Eyed Tree Frog",
+            "fileBase": "jungle_red_eyed_tree_frog",
+            "videoPrompt": "Blink eyes only, stay in position."
+          },
+          {
+            "id": "jungle_sloth_19",
+            "name": "Sloth",
+            "fileBase": "jungle_sloth",
+            "videoPrompt": "Very slow head movement, stay in position."
+          },
+          {
+            "id": "jungle_tapir_20",
+            "name": "Tapir",
+            "fileBase": "jungle_tapir",
+            "videoPrompt": "Fast one leg rise, stay in position."
+          },
+          {
+            "id": "jungle_tiger_21",
+            "name": "Tiger",
+            "fileBase": "jungle_tiger",
+            "videoPrompt": "Swing tail and blink with eyes, stay in position."
+          },
+          {
+            "id": "jungle_toucan_22",
+            "name": "Toucan",
+            "fileBase": "jungle_toucan",
+            "videoPrompt": "Move head slowly and open bit beak, make loop video."
+          }
+        ]
+      },
+      "imageGeneration": {
+        "tool": "ChatGPT",
+        "provider": "OpenAI",
+        "promptTemplate": "A realistic [animal] standing in a natural jungle environment, full body visible including head, legs and tail, centered in frame, animal filling most of the frame but no body parts cut off. Camera slightly low angle and close so the animal fills the portrait frame naturally. Lush tropical green foliage, jungle plants and trees surrounding the animal, natural daylight filtering through leaves. Ultra-detailed skin/fur texture, realistic anatomy, cinematic wildlife photography style, shallow depth of field, soft background bokeh, National Geographic style, highly detailed, photorealistic, natural colors, sharp focus on the animal. Portrait composition, 1024x1536, professional wildlife photo, no text, no watermark. 85mm lens, f/2.8, wildlife photography, cinematic lighting",
+        "variable": "[animal] = item name",
+        "output": {
+          "resolution": "1024x1536",
+          "orientation": "portrait",
+          "style": [
+            "photorealistic",
+            "cinematic wildlife photography",
+            "National Geographic style"
+          ]
+        }
+      },
+      "videoGeneration": {
+        "tool": "Leonardo AI",
+        "url": "https://app.leonardo.ai/",
+        "mode": "9:16 portrait",
+        "notes": "Different prompt was used for each animal. Fill videoPrompt per item."
+      }
+    };
+    const embeddedJungleTexts = {
+      "packId": "jungle",
+      "version": 1,
+      "defaultLanguage": "en",
+      "languages": [
+        "en",
+        "lt"
+      ],
+      "items": {
+        "jungle_blue_poison_dart_frog_01": {
+          "description": {
+            "en": "A tiny bright-blue frog with smooth skin and a powerful natural toxin used for defense.",
+            "lt": "Maža ryškiai mėlyna varlė su glotnia oda ir stipriu natūraliu toksinu, skirtu apsaugai."
+          }
+        },
+        "jungle_boa_constrictor_02": {
+          "description": {
+            "en": "A large non-venomous snake that wraps around prey with strong coils in dense jungle habitats.",
+            "lt": "Didelė nenuodinga gyvatė, kuri stipriais žiedais apsivynioja grobį tankiose džiunglėse."
+          }
+        },
+        "jungle_caiman_03": {
+          "description": {
+            "en": "A tough freshwater reptile related to crocodiles, often found resting near jungle rivers.",
+            "lt": "Tvirtas gėlavandenis roplys, giminingas krokodilams, dažnai sutinkamas prie džiunglių upių."
+          }
+        },
+        "jungle_capuchin_monkey_04": {
+          "description": {
+            "en": "A clever and curious monkey known for problem-solving and agile movement in the treetops.",
+            "lt": "Protinga ir smalsi beždžionė, garsėjanti problemų sprendimu ir judrumu medžių viršūnėse."
+          }
+        },
+        "jungle_chimpanzee_05": {
+          "description": {
+            "en": "A highly intelligent great ape that uses tools, communicates socially, and lives in close groups.",
+            "lt": "Labai protinga žmogbeždžionė, naudojanti įrankius, bendraujanti socialiai ir gyvenanti grupėmis."
+          }
+        },
+        "jungle_elephant_06": {
+          "description": {
+            "en": "The largest land mammal, using its trunk for feeding, drinking, and social interaction.",
+            "lt": "Didžiausias sausumos žinduolis, naudojantis straublį maistui, vandeniui ir bendravimui."
+          }
+        },
+        "jungle_gorilla_07": {
+          "description": {
+            "en": "A powerful but gentle great ape that lives in family groups and feeds mostly on plants.",
+            "lt": "Galinga, bet rami žmogbeždžionė, gyvenanti šeimyninėmis grupėmis ir daugiausia mintanti augalais."
+          }
+        },
+        "jungle_green_anaconda_08": {
+          "description": {
+            "en": "One of the world’s heaviest snakes, adapted to slow-moving jungle swamps and rivers.",
+            "lt": "Viena sunkiausių pasaulio gyvačių, prisitaikiusi gyventi lėtose džiunglių pelkėse ir upėse."
+          }
+        },
+        "jungle_harpy_eagle_09": {
+          "description": {
+            "en": "A massive rainforest raptor with strong talons, hunting from high jungle canopies.",
+            "lt": "Didžiulis atogrąžų plėšrus paukštis su stipriais nagais, medžiojantis aukštose džiunglių lajose."
+          }
+        },
+        "jungle_howler_monkey_10": {
+          "description": {
+            "en": "A tree-dwelling monkey famous for its deep, loud calls that carry across the forest.",
+            "lt": "Medžiuose gyvenanti beždžionė, garsėjanti galingu balsu, sklindančiu per visą mišką."
+          }
+        },
+        "jungle_jaguar_11": {
+          "description": {
+            "en": "A stealthy big cat with a powerful bite, often patrolling rivers and thick jungle cover.",
+            "lt": "Slaptas didysis katinas su labai stipriu sąkandžiu, dažnai medžiojantis prie upių ir tankmėje."
+          }
+        },
+        "jungle_leopard_12": {
+          "description": {
+            "en": "A strong and adaptable spotted big cat known for climbing and ambush hunting.",
+            "lt": "Stiprus ir prisitaikantis dėmėtas didysis katinas, žinomas dėl laipiojimo ir pasalų medžioklės."
+          }
+        },
+        "jungle_lion_13": {
+          "description": {
+            "en": "A muscular big cat with a commanding roar, recognized by the male’s iconic mane.",
+            "lt": "Raumeningas didysis katinas su galingu riaumojimu, patinai atpažįstami iš įspūdingų karčių."
+          }
+        },
+        "jungle_macaw_14": {
+          "description": {
+            "en": "A colorful parrot with a curved beak, loud voice, and strong flight through rainforest trees.",
+            "lt": "Spalvinga papūga su lenktu snapu, garsiu balsu ir stipriu skrydžiu tarp atogrąžų medžių."
+          }
+        },
+        "jungle_okapi_15": {
+          "description": {
+            "en": "A shy forest mammal related to giraffes, with zebra-like striped legs and a long tongue.",
+            "lt": "Nedrąsus miško žinduolis, giminingas žirafoms, su zebro juostomis ant kojų ir ilgu liežuviu."
+          }
+        },
+        "jungle_orangutan_16": {
+          "description": {
+            "en": "A thoughtful great ape with long arms, spending much of its time high in trees.",
+            "lt": "Mąsli žmogbeždžionė su ilgomis rankomis, daug laiko praleidžianti aukštai medžiuose."
+          }
+        },
+        "jungle_pangolin_17": {
+          "description": {
+            "en": "A scale-covered mammal that curls into a protective ball when threatened.",
+            "lt": "Žvynais padengtas žinduolis, kuris grėsmės atveju susisuka į apsauginį kamuolį."
+          }
+        },
+        "jungle_red_eyed_tree_frog_18": {
+          "description": {
+            "en": "A small green frog with striking red eyes, commonly seen on leaves near water.",
+            "lt": "Maža žalia varlė su ryškiomis raudonomis akimis, dažnai matoma ant lapų prie vandens."
+          }
+        },
+        "jungle_sloth_19": {
+          "description": {
+            "en": "A slow-moving tree mammal that hangs upside down and blends into jungle foliage.",
+            "lt": "Lėtai judantis medžių žinduolis, kabantis žemyn galva ir susiliejantis su džiunglių lapija."
+          }
+        },
+        "jungle_tapir_20": {
+          "description": {
+            "en": "A large herbivore with a short trunk-like snout, often found near rainforest streams.",
+            "lt": "Didelis žolėdis su trumpu straubliuką primenančiu snukiu, dažnas prie atogrąžų upelių."
+          }
+        },
+        "jungle_tiger_21": {
+          "description": {
+            "en": "A striped apex predator with great strength, sharp senses, and silent stalking skills.",
+            "lt": "Dryžuotas viršūninis plėšrūnas, pasižymintis jėga, aštriais pojūčiais ir tyliu sėlinimu."
+          }
+        },
+        "jungle_toucan_22": {
+          "description": {
+            "en": "A tropical bird with a large colorful bill, known for hopping between canopy branches.",
+            "lt": "Atogrąžų paukštis su dideliu spalvingu snapu, dažnai šokinėjantis tarp medžių lajų šakų."
+          }
+        }
+      }
+    };
+
     function renderCategories() {
       categoryGrid.innerHTML = '';
       Object.entries(library).forEach(([key, cat]) => {
@@ -410,12 +695,14 @@
         btn.innerHTML = `
           <span class="emoji">${cat.emoji}</span>
           <span class="name">${cat.label}</span>
-          <span class="meta">${cat.animals.length} animals</span>
-          ${isLocked ? '<span class="lock-badge">🔒 Locked</span>' : ''}
+          <span class="meta">${cat.comingSoon ? 'Not ready yet' : `${cat.animals.length} animals`}</span>
+          ${isLocked ? `<span class="lock-badge">${cat.comingSoon ? '⏳ Coming soon' : '🔒 Locked'}</span>` : ''}
         `;
         btn.addEventListener('click', () => {
           if (isLocked) {
-            speak(`${cat.label} pack is locked. Please purchase to unlock.`);
+            if (cat.comingSoon) {
+              alert(`${cat.label} pack is not ready yet. It will be available soon.`);
+            }
             return;
           }
           selectCategory(key);
@@ -433,6 +720,13 @@
     }
 
     function render(dir = 0) {
+      if (!animals.length) {
+        nameEl.textContent = 'No animals yet';
+        desc.textContent = 'This pack has no data.';
+        video.removeAttribute('src');
+        return;
+      }
+
       const a = animals[index];
       card.style.transform = `translateX(${dir * 24}px)`;
       setTimeout(() => {
@@ -445,22 +739,51 @@
       }, 100);
     }
 
-    function next() { index = (index + 1) % animals.length; render(1); }
-    function prev() { index = (index - 1 + animals.length) % animals.length; render(-1); }
+    function next() { if (animals.length) { index = (index + 1) % animals.length; render(1); } }
+    function prev() { if (animals.length) { index = (index - 1 + animals.length) % animals.length; render(-1); } }
 
-    function speak(text) {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.rate = 0.95;
-      u.pitch = 1.1;
-      window.speechSynthesis.speak(u);
+
+    async function loadJunglePack() {
+      const items = embeddedJunglePack?.pack?.items || [];
+      const textItems = embeddedJungleTexts?.items || {};
+      const assetPrefix = '../content/packs/jungle';
+
+      library.jungle.animals = items.map((item) => ({
+        id: item.id,
+        name: item.name,
+        desc: textItems[item.id]?.description?.en || 'No description',
+        sound: `${assetPrefix}/sounds/${item.fileBase}.mp3`,
+        video: `${assetPrefix}/videos/${item.fileBase}.mp4`
+      }));
     }
+
 
     document.getElementById('nextBtn').addEventListener('click', next);
     document.getElementById('prevBtn').addEventListener('click', prev);
-    document.getElementById('soundBtn').addEventListener('click', () => {
+    document.getElementById('soundBtn').addEventListener('click', async () => {
       const a = animals[index];
-      speak(`${a.name} says ${a.sound}`);
+      if (!a?.sound) return;
+
+      const soundUrl = encodeURI(a.sound);
+      try {
+        soundPlayer.pause();
+        soundPlayer.currentTime = 0;
+        soundPlayer.muted = false;
+        soundPlayer.volume = 1;
+        soundPlayer.src = soundUrl;
+        soundPlayer.load();
+        await soundPlayer.play();
+      } catch (err) {
+        console.warn('Primary audio player failed, trying fallback <audio> instance', err);
+        try {
+          const fallback = new Audio(soundUrl);
+          fallback.volume = 1;
+          await fallback.play();
+        } catch (err2) {
+          console.error('Sound playback failed:', err2);
+          alert('Could not play sound file for this animal.');
+        }
+      }
     });
     document.getElementById('changeCategoryBtn').addEventListener('click', () => {
       document.querySelector('.phones').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -475,15 +798,14 @@
       if (e.key === 'ArrowLeft') prev();
     });
 
-    stage.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
-    stage.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      if (dx < -40) next();
-      if (dx > 40) prev();
-    }, { passive: true });
 
-    renderCategories();
-    selectCategory('jungle');
+    (async () => {
+      renderCategories();
+      await loadJunglePack();
+      renderCategories();
+      selectCategory('jungle');
+    })();
   </script>
+
 </body>
 </html>
