@@ -1,0 +1,189 @@
+{
+  "project": "animals",
+  "version": 1,
+  "packs": [
+    {
+      "id": "jungle",
+      "name": "Jungle",
+      "texts": "content/packs/jungle/texts.json",
+      "items": [
+        {
+          "id": "jungle_blue_poison_dart_frog_01",
+          "name": "Blue Poison Dart Frog",
+          "image": "content/packs/jungle/images/jungle_blue_poison_dart_frog.png",
+          "sound": "content/packs/jungle/sounds/jungle_blue_poison_dart_frog.mp3",
+          "video": "content/packs/jungle/videos/jungle_blue_poison_dart_frog.mp4",
+          "fileBase": "jungle_blue_poison_dart_frog"
+        },
+        {
+          "id": "jungle_boa_constrictor_02",
+          "name": "Boa Constrictor",
+          "image": "content/packs/jungle/images/jungle_boa_constrictor.png",
+          "sound": "content/packs/jungle/sounds/jungle_boa_constrictor.mp3",
+          "video": "content/packs/jungle/videos/jungle_boa_constrictor.mp4",
+          "fileBase": "jungle_boa_constrictor"
+        },
+        {
+          "id": "jungle_caiman_03",
+          "name": "Caiman",
+          "image": "content/packs/jungle/images/jungle_caiman.png",
+          "sound": "content/packs/jungle/sounds/jungle_caiman.mp3",
+          "video": "content/packs/jungle/videos/jungle_caiman.mp4",
+          "fileBase": "jungle_caiman"
+        },
+        {
+          "id": "jungle_capuchin_monkey_04",
+          "name": "Capuchin Monkey",
+          "image": "content/packs/jungle/images/jungle_capuchin_monkey.png",
+          "sound": "content/packs/jungle/sounds/jungle_capuchin_monkey.mp3",
+          "video": "content/packs/jungle/videos/jungle_capuchin_monkey.mp4",
+          "fileBase": "jungle_capuchin_monkey"
+        },
+        {
+          "id": "jungle_chimpanzee_05",
+          "name": "Chimpanzee",
+          "image": "content/packs/jungle/images/jungle_chimpanzee.png",
+          "sound": "content/packs/jungle/sounds/jungle_chimpanzee.mp3",
+          "video": "content/packs/jungle/videos/jungle_chimpanzee.mp4",
+          "fileBase": "jungle_chimpanzee"
+        },
+        {
+          "id": "jungle_elephant_06",
+          "name": "Elephant",
+          "image": "content/packs/jungle/images/jungle_elephant.png",
+          "sound": "content/packs/jungle/sounds/jungle_elephant.mp3",
+          "video": "content/packs/jungle/videos/jungle_elephant.mp4",
+          "fileBase": "jungle_elephant"
+        },
+        {
+          "id": "jungle_gorilla_07",
+          "name": "Gorilla",
+          "image": "content/packs/jungle/images/jungle_gorilla.png",
+          "sound": "content/packs/jungle/sounds/jungle_gorilla.mp3",
+          "video": "content/packs/jungle/videos/jungle_gorilla.mp4",
+          "fileBase": "jungle_gorilla"
+        },
+        {
+          "id": "jungle_green_anaconda_08",
+          "name": "Green Anaconda",
+          "image": "content/packs/jungle/images/jungle_green_anaconda.png",
+          "sound": "content/packs/jungle/sounds/jungle_green_anaconda.mp3",
+          "video": "content/packs/jungle/videos/jungle_green_anaconda.mp4",
+          "fileBase": "jungle_green_anaconda"
+        },
+        {
+          "id": "jungle_harpy_eagle_09",
+          "name": "Harpy Eagle",
+          "image": "content/packs/jungle/images/jungle_harpy_eagle.png",
+          "sound": "content/packs/jungle/sounds/jungle_harpy_eagle.mp3",
+          "video": "content/packs/jungle/videos/jungle_harpy_eagle.mp4",
+          "fileBase": "jungle_harpy_eagle"
+        },
+        {
+          "id": "jungle_howler_monkey_10",
+          "name": "Howler Monkey",
+          "image": "content/packs/jungle/images/jungle_howler_monkey.png",
+          "sound": "content/packs/jungle/sounds/jungle_howler_monkey.mp3",
+          "video": "content/packs/jungle/videos/jungle_howler_monkey.mp4",
+          "fileBase": "jungle_howler_monkey"
+        },
+        {
+          "id": "jungle_jaguar_11",
+          "name": "Jaguar",
+          "image": "content/packs/jungle/images/jungle_jaguar.png",
+          "sound": "content/packs/jungle/sounds/jungle_jaguar.mp3",
+          "video": "content/packs/jungle/videos/jungle_jaguar.mp4",
+          "fileBase": "jungle_jaguar"
+        },
+        {
+          "id": "jungle_leopard_12",
+          "name": "Leopard",
+          "image": "content/packs/jungle/images/jungle_leopard.png",
+          "sound": "content/packs/jungle/sounds/jungle_leopard.mp3",
+          "video": "content/packs/jungle/videos/jungle_leopard.mp4",
+          "fileBase": "jungle_leopard"
+        },
+        {
+          "id": "jungle_lion_13",
+          "name": "Lion",
+          "image": "content/packs/jungle/images/jungle_lion.png",
+          "sound": "content/packs/jungle/sounds/jungle_lion.mp3",
+          "video": "content/packs/jungle/videos/jungle_lion.mp4",
+          "fileBase": "jungle_lion"
+        },
+        {
+          "id": "jungle_macaw_14",
+          "name": "Macaw",
+          "image": "content/packs/jungle/images/jungle_macaw.png",
+          "sound": "content/packs/jungle/sounds/jungle_macaw.mp3",
+          "video": "content/packs/jungle/videos/jungle_macaw.mp4",
+          "fileBase": "jungle_macaw"
+        },
+        {
+          "id": "jungle_okapi_15",
+          "name": "Okapi",
+          "image": "content/packs/jungle/images/jungle_okapi.png",
+          "sound": "content/packs/jungle/sounds/jungle_okapi.mp3",
+          "video": "content/packs/jungle/videos/jungle_okapi.mp4",
+          "fileBase": "jungle_okapi"
+        },
+        {
+          "id": "jungle_orangutan_16",
+          "name": "Orangutan",
+          "image": "content/packs/jungle/images/jungle_orangutan.png",
+          "sound": "content/packs/jungle/sounds/jungle_orangutan.mp3",
+          "video": "content/packs/jungle/videos/jungle_orangutan.mp4",
+          "fileBase": "jungle_orangutan"
+        },
+        {
+          "id": "jungle_pangolin_17",
+          "name": "Pangolin",
+          "image": "content/packs/jungle/images/jungle_pangolin.png",
+          "sound": "content/packs/jungle/sounds/jungle_pangolin.mp3",
+          "video": "content/packs/jungle/videos/jungle_pangolin.mp4",
+          "fileBase": "jungle_pangolin"
+        },
+        {
+          "id": "jungle_red_eyed_tree_frog_18",
+          "name": "Red-Eyed Tree Frog",
+          "image": "content/packs/jungle/images/jungle_red_eyed_tree_frog.png",
+          "sound": "content/packs/jungle/sounds/jungle_red_eyed_tree_frog.mp3",
+          "video": "content/packs/jungle/videos/jungle_red_eyed_tree_frog.mp4",
+          "fileBase": "jungle_red_eyed_tree_frog"
+        },
+        {
+          "id": "jungle_sloth_19",
+          "name": "Sloth",
+          "image": "content/packs/jungle/images/jungle_sloth.png",
+          "sound": "content/packs/jungle/sounds/jungle_sloth.mp3",
+          "video": "content/packs/jungle/videos/jungle_sloth.mp4",
+          "fileBase": "jungle_sloth"
+        },
+        {
+          "id": "jungle_tapir_20",
+          "name": "Tapir",
+          "image": "content/packs/jungle/images/jungle_tapir.png",
+          "sound": "content/packs/jungle/sounds/jungle_tapir.mp3",
+          "video": "content/packs/jungle/videos/jungle_tapir.mp4",
+          "fileBase": "jungle_tapir"
+        },
+        {
+          "id": "jungle_tiger_21",
+          "name": "Tiger",
+          "image": "content/packs/jungle/images/jungle_tiger.png",
+          "sound": "content/packs/jungle/sounds/jungle_tiger.mp3",
+          "video": "content/packs/jungle/videos/jungle_tiger.mp4",
+          "fileBase": "jungle_tiger"
+        },
+        {
+          "id": "jungle_toucan_22",
+          "name": "Toucan",
+          "image": "content/packs/jungle/images/jungle_toucan.png",
+          "sound": "content/packs/jungle/sounds/jungle_toucan.mp3",
+          "video": "content/packs/jungle/videos/jungle_toucan.mp4",
+          "fileBase": "jungle_toucan"
+        }
+      ]
+    }
+  ]
+}

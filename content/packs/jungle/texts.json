@@ -1,0 +1,143 @@
+{
+  "packId": "jungle",
+  "version": 1,
+  "defaultLanguage": "en",
+  "languages": [
+    "en",
+    "lt"
+  ],
+  "items": {
+    "jungle_blue_poison_dart_frog_01": {
+      "description": {
+        "en": "A tiny bright-blue frog with smooth skin and a powerful natural toxin used for defense.",
+        "lt": "Maža ryškiai mėlyna varlė su glotnia oda ir stipriu natūraliu toksinu, skirtu apsaugai."
+      }
+    },
+    "jungle_boa_constrictor_02": {
+      "description": {
+        "en": "A large non-venomous snake that wraps around prey with strong coils in dense jungle habitats.",
+        "lt": "Didelė nenuodinga gyvatė, kuri stipriais žiedais apsivynioja grobį tankiose džiunglėse."
+      }
+    },
+    "jungle_caiman_03": {
+      "description": {
+        "en": "A tough freshwater reptile related to crocodiles, often found resting near jungle rivers.",
+        "lt": "Tvirtas gėlavandenis roplys, giminingas krokodilams, dažnai sutinkamas prie džiunglių upių."
+      }
+    },
+    "jungle_capuchin_monkey_04": {
+      "description": {
+        "en": "A clever and curious monkey known for problem-solving and agile movement in the treetops.",
+        "lt": "Protinga ir smalsi beždžionė, garsėjanti problemų sprendimu ir judrumu medžių viršūnėse."
+      }
+    },
+    "jungle_chimpanzee_05": {
+      "description": {
+        "en": "A highly intelligent great ape that uses tools, communicates socially, and lives in close groups.",
+        "lt": "Labai protinga žmogbeždžionė, naudojanti įrankius, bendraujanti socialiai ir gyvenanti grupėmis."
+      }
+    },
+    "jungle_elephant_06": {
+      "description": {
+        "en": "The largest land mammal, using its trunk for feeding, drinking, and social interaction.",
+        "lt": "Didžiausias sausumos žinduolis, naudojantis straublį maistui, vandeniui ir bendravimui."
+      }
+    },
+    "jungle_gorilla_07": {
+      "description": {
+        "en": "A powerful but gentle great ape that lives in family groups and feeds mostly on plants.",
+        "lt": "Galinga, bet rami žmogbeždžionė, gyvenanti šeimyninėmis grupėmis ir daugiausia mintanti augalais."
+      }
+    },
+    "jungle_green_anaconda_08": {
+      "description": {
+        "en": "One of the world’s heaviest snakes, adapted to slow-moving jungle swamps and rivers.",
+        "lt": "Viena sunkiausių pasaulio gyvačių, prisitaikiusi gyventi lėtose džiunglių pelkėse ir upėse."
+      }
+    },
+    "jungle_harpy_eagle_09": {
+      "description": {
+        "en": "A massive rainforest raptor with strong talons, hunting from high jungle canopies.",
+        "lt": "Didžiulis atogrąžų plėšrus paukštis su stipriais nagais, medžiojantis aukštose džiunglių lajose."
+      }
+    },
+    "jungle_howler_monkey_10": {
+      "description": {
+        "en": "A tree-dwelling monkey famous for its deep, loud calls that carry across the forest.",
+        "lt": "Medžiuose gyvenanti beždžionė, garsėjanti galingu balsu, sklindančiu per visą mišką."
+      }
+    },
+    "jungle_jaguar_11": {
+      "description": {
+        "en": "A stealthy big cat with a powerful bite, often patrolling rivers and thick jungle cover.",
+        "lt": "Slaptas didysis katinas su labai stipriu sąkandžiu, dažnai medžiojantis prie upių ir tankmėje."
+      }
+    },
+    "jungle_leopard_12": {
+      "description": {
+        "en": "A strong and adaptable spotted big cat known for climbing and ambush hunting.",
+        "lt": "Stiprus ir prisitaikantis dėmėtas didysis katinas, žinomas dėl laipiojimo ir pasalų medžioklės."
+      }
+    },
+    "jungle_lion_13": {
+      "description": {
+        "en": "A muscular big cat with a commanding roar, recognized by the male’s iconic mane.",
+        "lt": "Raumeningas didysis katinas su galingu riaumojimu, patinai atpažįstami iš įspūdingų karčių."
+      }
+    },
+    "jungle_macaw_14": {
+      "description": {
+        "en": "A colorful parrot with a curved beak, loud voice, and strong flight through rainforest trees.",
+        "lt": "Spalvinga papūga su lenktu snapu, garsiu balsu ir stipriu skrydžiu tarp atogrąžų medžių."
+      }
+    },
+    "jungle_okapi_15": {
+      "description": {
+        "en": "A shy forest mammal related to giraffes, with zebra-like striped legs and a long tongue.",
+        "lt": "Nedrąsus miško žinduolis, giminingas žirafoms, su zebro juostomis ant kojų ir ilgu liežuviu."
+      }
+    },
+    "jungle_orangutan_16": {
+      "description": {
+        "en": "A thoughtful great ape with long arms, spending much of its time high in trees.",
+        "lt": "Mąsli žmogbeždžionė su ilgomis rankomis, daug laiko praleidžianti aukštai medžiuose."
+      }
+    },
+    "jungle_pangolin_17": {
+      "description": {
+        "en": "A scale-covered mammal that curls into a protective ball when threatened.",
+        "lt": "Žvynais padengtas žinduolis, kuris grėsmės atveju susisuka į apsauginį kamuolį."
+      }
+    },
+    "jungle_red_eyed_tree_frog_18": {
+      "description": {
+        "en": "A small green frog with striking red eyes, commonly seen on leaves near water.",
+        "lt": "Maža žalia varlė su ryškiomis raudonomis akimis, dažnai matoma ant lapų prie vandens."
+      }
+    },
+    "jungle_sloth_19": {
+      "description": {
+        "en": "A slow-moving tree mammal that hangs upside down and blends into jungle foliage.",
+        "lt": "Lėtai judantis medžių žinduolis, kabantis žemyn galva ir susiliejantis su džiunglių lapija."
+      }
+    },
+    "jungle_tapir_20": {
+      "description": {
+        "en": "A large herbivore with a short trunk-like snout, often found near rainforest streams.",
+        "lt": "Didelis žolėdis su trumpu straubliuką primenančiu snukiu, dažnas prie atogrąžų upelių."
+      }
+    },
+    "jungle_tiger_21": {
+      "description": {
+        "en": "A striped apex predator with great strength, sharp senses, and silent stalking skills.",
+        "lt": "Dryžuotas viršūninis plėšrūnas, pasižymintis jėga, aštriais pojūčiais ir tyliu sėlinimu."
+      }
+    },
+    "jungle_toucan_22": {
+      "description": {
+        "en": "A tropical bird with a large colorful bill, known for hopping between canopy branches.",
+        "lt": "Atogrąžų paukštis su dideliu spalvingu snapu, dažnai šokinėjantis tarp medžių lajų šakų."
+      }
+    }
+  }
+}
