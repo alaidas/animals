@@ -94,15 +94,6 @@
       gap: 8px;
       min-width: 0;
     }
-    #viewerTitle {
-      line-height: 1.1;
-      font-size: 1.06rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
 
     .category-view {
       flex: 1;
@@ -169,6 +160,74 @@
       border: 1px solid rgba(60,60,67,.12);
       overflow: hidden;
     }
+
+    .viewer-app {
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      --overlay-gap: 12px;
+      --controls-bottom: 12px;
+      --controls-height: 44px;
+      --desc-height: 56px;
+    }
+    .viewer-app .topbar {
+      position: absolute;
+      top: 44px;
+      left: 10px;
+      right: 10px;
+      z-index: 3;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+    .viewer-app .stage {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      border-radius: 0;
+      background: #000;
+      z-index: 1;
+    }
+    .viewer-app .card {
+      height: 100%;
+      padding: 0;
+      position: relative;
+    }
+    .viewer-app .animal-video {
+      height: 100%;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      touch-action: pan-y;
+      cursor: grab;
+      user-select: none;
+    }
+    .viewer-app .animal-video:active {
+      cursor: grabbing;
+    }
+    .viewer-app #animalName {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: calc(var(--controls-bottom) + var(--controls-height) + var(--overlay-gap) * 2 + var(--desc-height));
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,.7);
+      z-index: 2;
+    }
+    .viewer-app .desc {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: calc(var(--controls-bottom) + var(--controls-height) + var(--overlay-gap));
+      min-height: var(--desc-height);
+      margin: 0;
+      background: rgba(20,20,24,.55);
+      color: #fff;
+      border-color: rgba(255,255,255,.22);
+      z-index: 2;
+      backdrop-filter: blur(4px);
+    }
     .card {
       padding: 8px;
       text-align: center;
@@ -182,7 +241,7 @@
       flex: 1;
       min-height: 0;
       object-fit: cover;
-      object-position: center;
+      object-position: top center;
       border-radius: 12px;
       border: 1px solid #eef1f6;
       box-shadow: 0 1px 0 rgba(255,255,255,.35) inset;
@@ -197,6 +256,17 @@
       gap: 10px;
       margin-top: auto;
       padding-top: 12px;
+    }
+    .viewer-app .controls {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 3;
+      margin: 0;
+      padding: 0;
+      grid-template-columns: max-content;
+      justify-content: center;
     }
     button {
       border: 0;
@@ -318,11 +388,10 @@
       <div class="phone">
         <div class="notch"></div>
         <div class="screen">
-          <main class="app">
+          <main class="app viewer-app">
             <div class="topbar">
               <div class="topbar-left">
                 <button class="change-category" id="changeCategoryBtn">‹</button>
-                <span id="viewerTitle">🌿 Jungle animals</span>
               </div>
             </div>
 
@@ -335,9 +404,7 @@
             </section>
 
             <div class="controls">
-              <button class="prev" id="prevBtn">‹ Prev</button>
-              <button class="sound" id="soundBtn">Play sound</button>
-              <button class="next" id="nextBtn">Next ›</button>
+              <button class="sound" id="soundBtn" aria-label="Play sound" title="Play sound">🔊</button>
             </div>
           </main>
         </div>
@@ -366,7 +433,6 @@
     let index = 0;
 
     const categoryGrid = document.getElementById('categoryGrid');
-    const viewerTitle = document.getElementById('viewerTitle');
     const video = document.getElementById('animalVideo');
     const nameEl = document.getElementById('animalName');
     const desc = document.getElementById('animalDesc');
@@ -715,7 +781,6 @@
       currentCategory = key;
       animals = library[key].animals;
       index = 0;
-      viewerTitle.textContent = `${library[key].emoji} ${library[key].label} animals`;
       render(0);
     }
 
@@ -758,8 +823,6 @@
     }
 
 
-    document.getElementById('nextBtn').addEventListener('click', next);
-    document.getElementById('prevBtn').addEventListener('click', prev);
     document.getElementById('soundBtn').addEventListener('click', async () => {
       const a = animals[index];
       if (!a?.sound) return;
@@ -797,6 +860,36 @@
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
     });
+
+    let dragStartX = null;
+    let dragActive = false;
+    const swipeThreshold = 18;
+
+    const onPointerDown = (e) => {
+      dragStartX = e.clientX;
+      dragActive = true;
+      try { stage.setPointerCapture(e.pointerId); } catch {}
+    };
+
+    const onPointerUp = (e) => {
+      if (!dragActive || dragStartX === null) return;
+      const deltaX = e.clientX - dragStartX;
+      if (Math.abs(deltaX) >= swipeThreshold) {
+        if (deltaX < 0) next();
+        else prev();
+      }
+      dragActive = false;
+      dragStartX = null;
+    };
+
+    const onPointerCancel = () => {
+      dragActive = false;
+      dragStartX = null;
+    };
+
+    stage.addEventListener('pointerdown', onPointerDown);
+    stage.addEventListener('pointerup', onPointerUp);
+    stage.addEventListener('pointercancel', onPointerCancel);
 
 
     (async () => {
