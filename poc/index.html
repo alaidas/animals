@@ -9,6 +9,9 @@
       --text: #1c1c1e;
       --secondary: #8e8e93;
       --blue: #007aff;
+      --ios-fill: rgba(255,255,255,.7);
+      --ios-border: rgba(255,255,255,.28);
+      --ios-shadow: 0 10px 26px rgba(0,0,0,.18);
     }
     * { box-sizing: border-box; }
     body {
@@ -83,16 +86,40 @@
     .topbar {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       margin-bottom: 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid rgba(60,60,67,.16);
       gap: 8px;
+    }
+    .topbar-title {
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #6b7280;
     }
     .topbar-left {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       min-width: 0;
+    }
+    .home-app {
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.92), rgba(242,242,247,0) 30%),
+        linear-gradient(180deg, #f7f7fb 0%, #eef1f6 100%);
+    }
+    .home-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .home-kicker {
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: -0.01em;
     }
 
     .category-view {
@@ -102,54 +129,98 @@
       gap: 12px;
       min-height: 0;
     }
-    .category-title { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; margin: 4px 0 0; }
-    .category-sub { color: #666b76; margin: 0 0 4px; font-size: .92rem; }
+    .category-title {
+      font-size: 2rem;
+      line-height: 1.04;
+      font-weight: 750;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+    .category-sub {
+      color: #666b76;
+      margin: 0 0 4px;
+      font-size: .96rem;
+      line-height: 1.35;
+      max-width: 30ch;
+    }
     .category-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
       overflow: auto;
       padding-right: 2px;
     }
     .category-btn {
       position: relative;
-      border: 1px solid rgba(60,60,67,.18);
-      border-radius: 12px;
-      padding: 11px 10px;
-      background: rgba(255,255,255,.96);
+      min-height: 132px;
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 22px;
+      padding: 14px 14px 12px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.72)),
+        rgba(255,255,255,.7);
       text-align: left;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      align-items: flex-start;
+      gap: 6px;
       cursor: pointer;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.9) inset,
+        0 12px 32px rgba(31,41,55,.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
     }
-    .category-btn .emoji { font-size: 1.5rem; }
-    .category-btn .name { font-weight: 700; }
-    .category-btn .meta { color: var(--secondary); font-size: .82rem; }
+    .category-btn:hover {
+      filter: brightness(1.02);
+    }
+    .category-btn .emoji {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: inline-grid;
+      place-items: center;
+      font-size: 1.45rem;
+      background: rgba(10,132,255,.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+    }
+    .category-btn .name {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .category-btn .meta {
+      color: var(--secondary);
+      font-size: .82rem;
+      line-height: 1.35;
+      margin-top: auto;
+      padding-right: 52px;
+    }
     .category-btn.locked {
       background: repeating-linear-gradient(
         -45deg,
-        rgba(245,245,248,.95),
-        rgba(245,245,248,.95) 8px,
-        rgba(235,235,240,.95) 8px,
-        rgba(235,235,240,.95) 16px
+        rgba(246,247,251,.95),
+        rgba(246,247,251,.95) 10px,
+        rgba(238,240,246,.95) 10px,
+        rgba(238,240,246,.95) 20px
       );
-      border-color: rgba(60,60,67,.18);
+      border-color: rgba(255,255,255,.66);
       color: #7a7a80;
       cursor: not-allowed;
-      filter: grayscale(.25);
+      filter: grayscale(.18);
     }
     .category-btn .lock-badge {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: .72rem;
-      background: #fff;
+      top: 12px;
+      right: 12px;
+      font-size: .7rem;
+      background: rgba(255,255,255,.86);
       color: #6b6b73;
-      border: 1px solid rgba(60,60,67,.2);
+      border: 1px solid rgba(255,255,255,.74);
       border-radius: 999px;
-      padding: 3px 7px;
+      padding: 5px 8px;
       font-weight: 700;
+      box-shadow: 0 4px 14px rgba(31,41,55,.08);
     }
 
     .stage {
@@ -270,44 +341,80 @@
     }
     button {
       border: 0;
-      border-radius: 10px;
+      border-radius: 14px;
       padding: 11px 10px;
       font-weight: 600;
       font-size: 0.95rem;
       letter-spacing: -0.01em;
       cursor: pointer;
-      transition: transform 120ms ease, filter 120ms ease;
+      transition: transform 120ms ease, filter 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
       -webkit-tap-highlight-color: transparent;
+      font-family: inherit;
     }
     button:active { transform: scale(0.97); }
+    button svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+      flex: 0 0 auto;
+    }
     .prev,.next {
       background: rgba(118,118,128,.16);
       color:#1c1c1e;
       border: 1px solid rgba(60,60,67,.18);
     }
     .sound {
-      background: var(--blue);
-      color:#fff;
-      box-shadow: 0 1px 0 rgba(255,255,255,.35) inset;
-    }
-
-    .change-category {
-      width: 34px;
-      height: 34px;
-      border: 0;
-      border-radius: 10px;
+      width: 50px;
+      height: 50px;
       padding: 0;
-      background: rgba(10,132,255,.10);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.56)),
+        rgba(255,255,255,.48);
       color: var(--blue);
-      font-size: 1.55rem;
-      font-weight: 600;
-      letter-spacing: 0;
-      line-height: 1;
+      border: 1px solid var(--ios-border);
+      box-shadow: var(--ios-shadow), inset 0 1px 0 rgba(255,255,255,.65);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
       display: inline-grid;
       place-items: center;
     }
+    .sound:hover { filter: brightness(1.03); }
 
-    .left-note { text-align:center; margin-top:10px; font-size:.82rem; color:var(--secondary); }
+    .change-category {
+      min-width: 44px;
+      height: 36px;
+      padding: 0 12px 0 9px;
+      background: var(--ios-fill);
+      color: var(--blue);
+      border: 1px solid var(--ios-border);
+      border-radius: 18px;
+      box-shadow: var(--ios-shadow), inset 0 1px 0 rgba(255,255,255,.7);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .change-category:hover { filter: brightness(1.03); }
+    .change-category svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 3;
+    }
+
+    .left-note {
+      text-align:center;
+      margin-top:10px;
+      font-size:.82rem;
+      color:var(--secondary);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
 
     .layout {
       width: min(980px, 100%);
@@ -317,41 +424,66 @@
     }
     .theme-toggle-wrap { display:flex; justify-content:flex-end; }
     .theme-toggle {
-      border: 1px solid rgba(60,60,67,.2);
-      background: #fff;
+      border: 1px solid rgba(255,255,255,.74);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.72)),
+        rgba(255,255,255,.66);
       color: #1c1c1e;
-      border-radius: 12px;
-      padding: 8px 12px;
+      border-radius: 16px;
+      padding: 10px 14px;
       font-size: .9rem;
       font-weight: 600;
+      box-shadow: 0 8px 24px rgba(31,41,55,.08), inset 0 1px 0 rgba(255,255,255,.86);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
     }
 
     .dark-row .screen { background: #111318; border-color: #2d3138; }
     .dark-row .app { color: #f5f5f7; }
+    .dark-row .home-app {
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.08), rgba(17,19,24,0) 24%),
+        linear-gradient(180deg, #151922 0%, #0f131a 100%);
+    }
     .dark-row .topbar { border-bottom-color: rgba(255,255,255,.12); }
+    .dark-row .topbar-title { color: #b7beca; }
+    .dark-row .home-kicker { color: #74b4ff; }
     .dark-row .category-sub,
     .dark-row .left-note,
     .dark-row .category-btn .meta { color: #a5acb8; }
     .dark-row .category-btn {
-      background: #1a1f28;
-      border-color: rgba(255,255,255,.12);
+      background:
+        linear-gradient(180deg, rgba(35,41,54,.96), rgba(24,29,38,.92)),
+        #1a1f28;
+      border-color: rgba(255,255,255,.08);
       color: #f5f5f7;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 12px 32px rgba(0,0,0,.28);
+    }
+    .dark-row .category-btn .emoji {
+      background: rgba(10,132,255,.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
     }
     .dark-row .category-btn.locked {
       background: repeating-linear-gradient(-45deg,#202530,#202530 8px,#1b202a 8px,#1b202a 16px);
       color: #8e96a3;
-      border-color: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.08);
     }
     .dark-row .category-btn .lock-badge {
-      background: #0f131a;
+      background: rgba(15,19,26,.82);
       color: #c6ccd8;
-      border-color: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.08);
     }
     .dark-row .stage { background: #1a1f28; border-color: rgba(255,255,255,.12); }
     .dark-row .desc { background: #12161d; color: #d6dbe4; }
     .dark-row .prev,
     .dark-row .next { background: #232936; color: #e9edf5; border-color: rgba(255,255,255,.12); }
-    .dark-row .change-category { background: rgba(10,132,255,.2); color: #74b4ff; }
+    .dark-row .change-category { background: rgba(23,28,36,.72); color: #74b4ff; border-color: rgba(255,255,255,.08); }
+    .dark-row .theme-toggle {
+      background: rgba(23,28,36,.78);
+      color: #eef2f8;
+      border-color: rgba(255,255,255,.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 24px rgba(0,0,0,.24);
+    }
 
     @media (max-width: 980px) {
       body { overflow: auto; }
@@ -367,14 +499,17 @@
       <div class="phone">
         <div class="notch"></div>
         <div class="screen">
-          <main class="app">
+          <main class="app home-app">
             <div class="topbar">
-              <span>Wildlife Explorer</span>
+              <span class="topbar-title">Library</span>
             </div>
 
             <section class="category-view">
-              <h2 class="category-title">Choose a pack</h2>
-              <p class="category-sub">Explore available packs and upcoming ones</p>
+              <div class="home-header">
+                <span class="home-kicker">Animals App</span>
+                <h2 class="category-title">Choose a pack</h2>
+                <p class="category-sub">Explore available packs and upcoming worlds with the same polished, native iOS feel.</p>
+              </div>
 
               <div class="category-grid" id="categoryGrid"></div>
             </section>
@@ -441,8 +576,26 @@
 
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const previewRow = document.getElementById('previewRow');
+    const changeCategoryBtn = document.getElementById('changeCategoryBtn');
+    const soundBtn = document.getElementById('soundBtn');
 
     const soundPlayer = new Audio();
+
+    changeCategoryBtn.setAttribute('aria-label', 'Back');
+    changeCategoryBtn.setAttribute('title', 'Back');
+    changeCategoryBtn.innerHTML = `
+      <svg viewBox="0 0 20 20" aria-hidden="true" fill="none">
+        <path d="M12.5 3.5 6 10l6.5 6.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `;
+
+    soundBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+        <path d="M5 14.5v-5h3.1L12 6.4v11.2l-3.9-3.1H5Z" fill="currentColor"/>
+        <path d="M15.25 9.25a4 4 0 0 1 0 5.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        <path d="M17.75 6.75a7.5 7.5 0 0 1 0 10.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+      </svg>
+    `;
 
     const embeddedJunglePack = {
       "project": "animals",
@@ -823,7 +976,7 @@
     }
 
 
-    document.getElementById('soundBtn').addEventListener('click', async () => {
+    soundBtn.addEventListener('click', async () => {
       const a = animals[index];
       if (!a?.sound) return;
 
@@ -848,7 +1001,7 @@
         }
       }
     });
-    document.getElementById('changeCategoryBtn').addEventListener('click', () => {
+    changeCategoryBtn.addEventListener('click', () => {
       document.querySelector('.phones').scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
     themeToggleBtn.addEventListener('click', () => {
