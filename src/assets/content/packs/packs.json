@@ -5,6 +5,9 @@
     {
       "id": "jungle",
       "name": "Jungle",
+      "emoji": "🌿",
+      "purchased": true,
+      "comingSoon": false,
       "texts": "content/packs/jungle/texts.json",
       "items": [
         {
@@ -184,6 +187,30 @@
           "fileBase": "jungle_toucan"
         }
       ]
+    },
+    {
+      "id": "pets",
+      "name": "Pets",
+      "emoji": "🐶",
+      "purchased": false,
+      "comingSoon": true,
+      "items": []
+    },
+    {
+      "id": "water",
+      "name": "Water",
+      "emoji": "🐬",
+      "purchased": false,
+      "comingSoon": true,
+      "items": []
+    },
+    {
+      "id": "birds",
+      "name": "Birds",
+      "emoji": "🦜",
+      "purchased": false,
+      "comingSoon": true,
+      "items": []
     }
   ]
 }

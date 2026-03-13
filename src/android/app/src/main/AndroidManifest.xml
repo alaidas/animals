@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="animals_app"
+        android:label="Tiny Safari – Animal Sounds for Kids"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

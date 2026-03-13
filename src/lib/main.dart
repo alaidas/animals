@@ -17,7 +17,7 @@ class AnimalsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Animals App',
+      title: 'Tiny Safari – Animal Sounds for Kids',
       themeMode: ThemeMode.system,
       theme: _buildTheme(Brightness.light),
       darkTheme: _buildTheme(Brightness.dark),
@@ -115,7 +115,7 @@ class LibraryScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'Animals App',
+                      'Tiny Safari – Animal Sounds for Kids',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: const Color(0xFF0A84FF),
                             fontWeight: FontWeight.w700,
@@ -223,6 +223,7 @@ class _ViewerScreenState extends State<ViewerScreen> {
   @override
   void initState() {
     super.initState();
+    _configureAudioPlayer();
     _setAnimal(0);
   }
 
@@ -233,10 +234,21 @@ class _ViewerScreenState extends State<ViewerScreen> {
     super.dispose();
   }
 
+  Future<void> _configureAudioPlayer() async {
+    await _audioPlayer.setAudioContext(
+      AudioContextConfig(
+        focus: AudioContextConfigFocus.mixWithOthers,
+      ).build(),
+    );
+  }
+
   Future<void> _setAnimal(int index) async {
     final nextAnimal = widget.pack.animals[index];
     final oldController = _videoController;
-    final controller = VideoPlayerController.asset(nextAnimal.videoAssetPath);
+    final controller = VideoPlayerController.asset(
+      nextAnimal.videoAssetPath,
+      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+    );
 
     setState(() {
       _currentIndex = index;
@@ -694,73 +706,58 @@ class AnimalRepository {
   const AnimalRepository();
 
   static const _packsAsset = 'assets/content/packs/packs.json';
-  static const _textsAsset = 'assets/content/packs/jungle/texts.json';
 
   Future<AppLibrary> loadLibrary() async {
     final packsJson = jsonDecode(await rootBundle.loadString(_packsAsset))
         as Map<String, dynamic>;
-    final textsJson = jsonDecode(await rootBundle.loadString(_textsAsset))
-        as Map<String, dynamic>;
-
-    final textItems = (textsJson['items'] as Map<String, dynamic>?) ?? {};
     final packs = (packsJson['packs'] as List<dynamic>? ?? [])
         .cast<Map<String, dynamic>>();
-    final jungleMap = packs.firstWhere(
-      (pack) => pack['id'] == 'jungle',
-      orElse: () => <String, dynamic>{},
-    );
+    final libraryPacks = <AnimalPack>[];
 
-    final jungleAnimals = ((jungleMap['items'] as List<dynamic>? ?? const [])
-            .cast<Map<String, dynamic>>())
-        .map((item) {
-      final id = item['id'] as String? ?? '';
-      final descriptionMap =
-          ((textItems[id] as Map<String, dynamic>?)?['description']
-                  as Map<String, dynamic>?) ??
-              {};
+    for (final pack in packs) {
+      final textItems = await _loadTextItems(pack['texts'] as String?);
+      final animals = ((pack['items'] as List<dynamic>? ?? const [])
+              .cast<Map<String, dynamic>>())
+          .map((item) {
+        final id = item['id'] as String? ?? '';
+        final descriptionMap =
+            ((textItems[id] as Map<String, dynamic>?)?['description']
+                    as Map<String, dynamic>?) ??
+                {};
 
-      return AnimalItem(
-        id: id,
-        name: item['name'] as String? ?? 'Unknown animal',
-        description: descriptionMap['en'] as String? ?? 'No description',
-        imageAssetPath: _assetPath(item['image'] as String?),
-        soundAssetPath: _assetPath(item['sound'] as String?),
-        videoAssetPath: _assetPath(item['video'] as String?),
-      );
-    }).toList(growable: false);
+        return AnimalItem(
+          id: id,
+          name: item['name'] as String? ?? 'Unknown animal',
+          description: descriptionMap['en'] as String? ?? 'No description',
+          imageAssetPath: _assetPath(item['image'] as String?),
+          soundAssetPath: _assetPath(item['sound'] as String?),
+          videoAssetPath: _assetPath(item['video'] as String?),
+        );
+      }).toList(growable: false);
 
-    return AppLibrary(
-      packs: [
+      libraryPacks.add(
         AnimalPack(
-          id: 'jungle',
-          name: 'Jungle',
-          emoji: '🌿',
-          animals: jungleAnimals,
+          id: pack['id'] as String? ?? 'unknown',
+          name: pack['name'] as String? ?? 'Unknown pack',
+          emoji: pack['emoji'] as String? ?? '📦',
+          animals: animals,
+          isLocked: !(pack['purchased'] as bool? ?? false),
+          isComingSoon: pack['comingSoon'] as bool? ?? false,
         ),
-        const AnimalPack(
-          id: 'pets',
-          name: 'Pets',
-          emoji: '🐶',
-          animals: [],
-          isLocked: true,
-        ),
-        const AnimalPack(
-          id: 'water',
-          name: 'Water',
-          emoji: '🐬',
-          animals: [],
-          isLocked: true,
-        ),
-        const AnimalPack(
-          id: 'birds',
-          name: 'Birds',
-          emoji: '🦜',
-          animals: [],
-          isLocked: true,
-          isComingSoon: true,
-        ),
-      ],
-    );
+      );
+    }
+
+    return AppLibrary(packs: libraryPacks);
+  }
+
+  Future<Map<String, dynamic>> _loadTextItems(String? path) async {
+    if (path == null || path.isEmpty) {
+      return const {};
+    }
+
+    final textsJson = jsonDecode(await rootBundle.loadString(_assetPath(path)))
+        as Map<String, dynamic>;
+    return (textsJson['items'] as Map<String, dynamic>?) ?? {};
   }
 
   static String _assetPath(String? path) => 'assets/${path ?? ''}';
