@@ -1,0 +1,163 @@
+{
+  "project": "animals",
+  "version": 1,
+  "pack": {
+    "id": "jungle",
+    "name": "Jungle",
+    "items": [
+      {
+        "id": "jungle_blue_poison_dart_frog_01",
+        "name": "Blue Poison Dart Frog",
+        "fileBase": "jungle_blue_poison_dart_frog",
+        "videoPrompt": "Slowly move head and make breathing movement."
+      },
+      {
+        "id": "jungle_boa_constrictor_02",
+        "name": "Boa Constrictor",
+        "fileBase": "jungle_boa_constrictor",
+        "videoPrompt": "Slowly move head and wigle the tonge."
+      },
+      {
+        "id": "jungle_caiman_03",
+        "name": "Caiman",
+        "fileBase": "jungle_caiman",
+        "videoPrompt": "Slowly move head and open thw jaw."
+      },
+      {
+        "id": "jungle_capuchin_monkey_04",
+        "name": "Capuchin Monkey",
+        "fileBase": "jungle_capuchin_monkey",
+        "videoPrompt": "Very small movement."
+      },
+      {
+        "id": "jungle_chimpanzee_05",
+        "name": "Chimpanzee",
+        "fileBase": "jungle_chimpanzee",
+        "videoPrompt": "Slowly move head and lift hands."
+      },
+      {
+        "id": "jungle_elephant_06",
+        "name": "Elephant",
+        "fileBase": "jungle_elephant",
+        "videoPrompt": "Swing tail, and move head. Do not walk."
+      },
+      {
+        "id": "jungle_gorilla_07",
+        "name": "Gorilla",
+        "fileBase": "jungle_gorilla",
+        "videoPrompt": "Slow head movement only, stay in position."
+      },
+      {
+        "id": "jungle_green_anaconda_08",
+        "name": "Green Anaconda",
+        "fileBase": "jungle_green_anaconda",
+        "videoPrompt": ""
+      },
+      {
+        "id": "jungle_harpy_eagle_09",
+        "name": "Harpy Eagle",
+        "fileBase": "jungle_harpy_eagle",
+        "videoPrompt": "Only head moving."
+      },
+      {
+        "id": "jungle_howler_monkey_10",
+        "name": "Howler Monkey",
+        "fileBase": "jungle_howler_monkey",
+        "videoPrompt": "Close and open mouth, stay in position."
+      },
+      {
+        "id": "jungle_jaguar_11",
+        "name": "Jaguar",
+        "fileBase": "jungle_jaguar",
+        "videoPrompt": "Swing tale and slowly move head, make loop."
+      },
+      {
+        "id": "jungle_leopard_12",
+        "name": "Leopard",
+        "fileBase": "jungle_leopard",
+        "videoPrompt": "Swing tail and move head, stay in position."
+      },
+      {
+        "id": "jungle_lion_13",
+        "name": "Lion",
+        "fileBase": "jungle_lion",
+        "videoPrompt": "Swing tale and head. Stay in position."
+      },
+      {
+        "id": "jungle_macaw_14",
+        "name": "Macaw",
+        "fileBase": "jungle_macaw",
+        "videoPrompt": "Turn head and fast expand wings, stay in position."
+      },
+      {
+        "id": "jungle_okapi_15",
+        "name": "Okapi",
+        "fileBase": "jungle_okapi",
+        "videoPrompt": "Turn head and lift one leg, stay in position."
+      },
+      {
+        "id": "jungle_orangutan_16",
+        "name": "Orangutan",
+        "fileBase": "jungle_orangutan",
+        "videoPrompt": "Turn head and lift one arm only, stay in position."
+      },
+      {
+        "id": "jungle_pangolin_17",
+        "name": "Pangolin",
+        "fileBase": "jungle_pangolin",
+        "videoPrompt": "Turn head and swing tail, stay in position."
+      },
+      {
+        "id": "jungle_red_eyed_tree_frog_18",
+        "name": "Red-Eyed Tree Frog",
+        "fileBase": "jungle_red_eyed_tree_frog",
+        "videoPrompt": "Blink eyes only, stay in position."
+      },
+      {
+        "id": "jungle_sloth_19",
+        "name": "Sloth",
+        "fileBase": "jungle_sloth",
+        "videoPrompt": "Very slow head movement, stay in position."
+      },
+      {
+        "id": "jungle_tapir_20",
+        "name": "Tapir",
+        "fileBase": "jungle_tapir",
+        "videoPrompt": "Fast one leg rise, stay in position."
+      },
+      {
+        "id": "jungle_tiger_21",
+        "name": "Tiger",
+        "fileBase": "jungle_tiger",
+        "videoPrompt": "Swing tail and blink with eyes, stay in position."
+      },
+      {
+        "id": "jungle_toucan_22",
+        "name": "Toucan",
+        "fileBase": "jungle_toucan",
+        "videoPrompt": "Move head slowly and open bit beak, make loop video."
+      }
+    ]
+  },
+  "imageGeneration": {
+    "tool": "ChatGPT",
+    "provider": "OpenAI",
+    "promptTemplate": "A realistic [animal] standing in a natural jungle environment, full body visible including head, legs and tail, centered in frame, animal filling most of the frame but no body parts cut off. Camera slightly low angle and close so the animal fills the portrait frame naturally. Lush tropical green foliage, jungle plants and trees surrounding the animal, natural daylight filtering through leaves. Ultra-detailed skin/fur texture, realistic anatomy, cinematic wildlife photography style, shallow depth of field, soft background bokeh, National Geographic style, highly detailed, photorealistic, natural colors, sharp focus on the animal. Portrait composition, 1024x1536, professional wildlife photo, no text, no watermark. 85mm lens, f/2.8, wildlife photography, cinematic lighting",
+    "variable": "[animal] = item name",
+    "output": {
+      "resolution": "1024x1536",
+      "orientation": "portrait",
+      "style": [
+        "photorealistic",
+        "cinematic wildlife photography",
+        "National Geographic style"
+      ]
+    }
+  },
+  "videoGeneration": {
+    "tool": "Leonardo AI",
+    "url": "https://app.leonardo.ai/",
+    "mode": "9:16 portrait",
+    "notes": "Different prompt was used for each animal. Fill videoPrompt per item."
+  }
+}
